@@ -1,0 +1,545 @@
+## Enhanced User Story in English
+
+### User Story: Add Candidate to the ATS
+
+**As a** recruiter,
+**I want** to be able to add new candidates into the Applicant Tracking System (ATS),
+**so that** I can manage their information and track their recruitment process efficiently and accurately.
+
+---
+
+## Description
+
+The system must provide recruiters with a simple, intuitive, and reliable way to register new candidates in the ATS. This functionality should allow the recruiter to enter candidate personal and professional information, upload supporting documents such as a résumé, and save the profile so it can be used throughout the recruitment lifecycle.
+
+The feature should be easy to access from the recruiter dashboard and should include appropriate validation, usability, accessibility, and error-handling mechanisms to ensure a smooth experience across devices and browsers.
+
+---
+
+## Acceptance Criteria
+
+### 1. Function Accessibility
+
+A clearly visible button or link labeled something like **“Add Candidate”** must be available from the main recruiter dashboard.
+When selected, it must take the recruiter directly to the candidate creation form.
+
+### 2. Candidate Data Entry Form
+
+When the recruiter chooses to add a candidate, the system must display a form containing all necessary fields to capture candidate information, including at minimum:
+
+* First name
+* Last name
+* Email address
+* Phone number
+* Address
+* Education
+* Work experience
+
+The form should be logically structured and easy to complete.
+
+### 3. Data Validation
+
+The form must validate the entered data to ensure completeness and correctness before submission. This includes, at minimum:
+
+* Required fields must not be left blank
+* Email address must be in a valid format
+* Phone number must follow an acceptable format
+* Invalid or incomplete data must trigger clear inline validation messages
+
+The recruiter must not be able to submit the form until validation requirements are met.
+
+### 4. Document Upload
+
+The recruiter must be able to upload the candidate’s résumé/CV as part of the creation process.
+Accepted file types must include:
+
+* PDF
+* DOCX
+
+The system should validate file type and, if applicable, file size limits before upload.
+
+### 5. Confirmation of Successful Addition
+
+Once the recruiter successfully submits the form, the system must display a confirmation message indicating that the candidate has been added successfully.
+
+The system may also redirect the recruiter to the candidate profile page or candidate list after successful creation.
+
+### 6. Error Handling and Exception Management
+
+If an error occurs during submission, such as a server failure, network issue, or unexpected processing error, the system must display an appropriate and user-friendly error message explaining that the operation could not be completed.
+
+The system should preserve entered data whenever possible to prevent unnecessary rework.
+
+### 7. Accessibility and Cross-Platform Compatibility
+
+The functionality must be accessible and compatible across different devices, screen sizes, and modern web browsers.
+
+The interface should comply with basic accessibility principles, such as:
+
+* Proper form labels
+* Keyboard navigability
+* Readable contrast
+* Screen reader support where applicable
+
+---
+
+## Notes
+
+* The interface should be intuitive and easy to use in order to reduce the amount of training required for new recruiters.
+* Consider adding autocomplete or suggestion features for education and work experience fields, using existing data already stored in the system.
+* The solution must protect candidate data and respect privacy and security requirements.
+
+---
+
+# Thorough Development of the 3 Technical Tasks
+
+## Technical Task 1: Implement the User Interface for the Add Candidate Form
+
+### Objective
+
+Design and implement a responsive, user-friendly, and accessible frontend interface that allows recruiters to input candidate data and upload documents efficiently.
+
+### Scope
+
+This task includes the visual design, layout, client-side interactions, validation feedback, file upload controls, responsiveness, and accessibility compliance of the “Add Candidate” feature.
+
+### Functional Components
+
+#### 1. Access Entry Point
+
+The recruiter dashboard must include a prominent **“Add Candidate”** button or action link.
+This should be placed in a consistent and visible location, such as:
+
+* Top-right corner of the dashboard
+* Primary action area in the candidate management section
+* Floating action button in mobile view if appropriate
+
+#### 2. Candidate Form Structure
+
+The form should be divided into logical sections to improve readability and usability, for example:
+
+**Personal Information**
+
+* First name
+* Last name
+* Email
+* Phone
+* Address
+
+**Professional Background**
+
+* Education
+* Work experience
+
+**Attachments**
+
+* Resume upload
+
+This structure reduces cognitive load and makes the form easier to complete.
+
+#### 3. Form Controls and UX Considerations
+
+Each field should include:
+
+* Clear label
+* Placeholder or help text where useful
+* Required/optional indicator
+* Inline validation feedback
+* Consistent spacing and alignment
+
+For text-heavy fields such as education and experience, use expandable text areas or structured repeatable sections if future scalability is desired.
+
+#### 4. File Upload UI
+
+The interface must support CV upload with:
+
+* Drag-and-drop zone or upload button
+* Accepted format notice: PDF, DOCX
+* File validation feedback
+* Upload progress or file name preview after selection
+* Ability to remove or replace the selected file before submission
+
+#### 5. Client-Side Validation
+
+Validation should happen as early as possible to reduce failed submissions.
+Recommended validations include:
+
+* Required field presence
+* Email regex validation
+* Phone input format validation
+* File type validation
+* File size validation
+* Length limits for text fields
+
+Error messages should appear close to the relevant field and should be understandable to non-technical users.
+
+#### 6. Responsive Design
+
+The form must work well on:
+
+* Desktop
+* Tablet
+* Mobile browsers
+
+This requires:
+
+* Responsive layout grids
+* Scalable buttons and inputs
+* Mobile-friendly file upload interaction
+* Proper spacing for touch devices
+
+#### 7. Accessibility Requirements
+
+The UI should be designed with accessibility in mind:
+
+* Proper HTML labels associated with every input
+* Keyboard-only navigation support
+* Focus state visibility
+* Semantic HTML structure
+* ARIA support where needed
+* Error announcements for assistive technologies
+
+### Non-Functional Considerations
+
+* Fast load time
+* Consistent styling with the existing ATS design system
+* Cross-browser compatibility
+* Reusable components for future forms
+
+### Deliverables
+
+* Recruiter dashboard update with Add Candidate entry point
+* Add Candidate page or modal
+* Fully functional form UI
+* Resume upload component
+* Client-side validation implementation
+* Responsive and accessible frontend behavior
+
+### Suggested Subtasks
+
+* Design wireframe/mockup for the form
+* Build form layout and field components
+* Add validation states and inline messaging
+* Implement file upload component
+* Connect the UI to backend API endpoints
+* Perform browser and device testing
+* Perform accessibility testing
+
+---
+
+## Technical Task 2: Develop the Backend Required to Process Submitted Candidate Information
+
+### Objective
+
+Build the server-side services, business logic, APIs, validation, and persistence layer needed to receive, validate, store, and manage candidate information submitted from the frontend.
+
+### Scope
+
+This task covers the complete backend flow from request submission to candidate record creation, file handling, validation, storage, and response handling.
+
+### Backend Functional Requirements
+
+#### 1. API Endpoint Creation
+
+Create a secure backend endpoint such as:
+
+* `POST /api/candidates`
+
+This endpoint should:
+
+* Receive candidate form data
+* Receive or reference uploaded CV file
+* Validate all required inputs
+* Create a new candidate record in the database
+* Return success or failure response
+
+Additional endpoints may be needed for:
+
+* File upload
+* Candidate retrieval after creation
+* Autocomplete suggestions for education and experience fields
+
+#### 2. Server-Side Validation
+
+Frontend validation is not enough; the backend must perform full validation again to enforce data integrity and security.
+
+Required backend validations include:
+
+* Required fields are present
+* Email format is valid
+* Phone format complies with allowed pattern
+* Uploaded file type is allowed
+* File size does not exceed system limits
+* Duplicate records can be identified if business rules require it, such as same email already existing
+
+#### 3. Business Logic
+
+The system should define how a candidate is created in ATS terms.
+This may include:
+
+* Assigning a unique candidate ID
+* Setting candidate status to default value such as “New”
+* Timestamping creation date
+* Associating the record with the recruiter who created it
+* Initializing workflow metadata if the ATS requires stage tracking
+
+#### 4. Database Design and Persistence
+
+A data model must be created or extended to store candidate information.
+Potential fields include:
+
+* Candidate ID
+* First name
+* Last name
+* Email
+* Phone
+* Address
+* Education
+* Work experience
+* CV file path or document reference
+* Created by
+* Created date
+* Updated date
+* Status
+
+If education and work experience are expected to become more detailed later, it may be better to normalize them into related tables instead of storing them as plain text.
+
+#### 5. File Storage Management
+
+The CV upload must be handled securely and reliably.
+The backend should:
+
+* Accept PDF and DOCX only
+* Verify MIME type and extension
+* Rename files safely to avoid collisions
+* Store files in secure storage, either local or cloud
+* Save file metadata and storage path in the database
+* Prevent execution of uploaded files
+* Reject malicious or unsupported uploads
+
+#### 6. API Response Handling
+
+The backend should return structured responses such as:
+
+**Success response**
+
+* Candidate created successfully
+* Candidate ID
+* Optional redirect or profile URL
+
+**Error response**
+
+* Validation error details
+* File upload issue
+* Duplicate candidate issue
+* Internal server error
+
+Responses should be standardized for easier frontend integration.
+
+#### 7. Logging and Monitoring
+
+The system should log:
+
+* Candidate creation attempts
+* Validation failures
+* File upload failures
+* Unexpected exceptions
+* User identity for audit purposes
+
+This is essential for troubleshooting and system support.
+
+### Non-Functional Considerations
+
+* Scalability for growing candidate volume
+* Transaction consistency between form submission and file storage
+* Good API performance
+* Clean error contracts
+* Maintainable service architecture
+
+### Deliverables
+
+* Candidate creation API
+* Backend validation rules
+* Candidate database schema/model
+* File upload handling service
+* Standardized success/error responses
+* Logging and audit support
+
+### Suggested Subtasks
+
+* Define candidate entity/model
+* Create database migration scripts
+* Implement API controller/route
+* Implement service layer and validation logic
+* Implement secure file upload service
+* Add duplicate detection rules if applicable
+* Create unit and integration tests
+* Document the endpoint for frontend integration
+
+---
+
+## Technical Task 3: Ensure Security and Privacy of Candidate Data
+
+### Objective
+
+Protect candidate personal data throughout the entire lifecycle of the feature, ensuring confidentiality, integrity, secure access, and compliance with privacy expectations and organizational policies.
+
+### Scope
+
+This task includes authentication, authorization, secure transmission, secure storage, input sanitization, privacy controls, auditability, and regulatory considerations related to candidate data.
+
+### Security Requirements
+
+#### 1. Authentication and Authorization
+
+Only authenticated users with the correct role, such as recruiters or authorized HR personnel, should be able to access the Add Candidate feature.
+
+This includes:
+
+* Restricting UI visibility based on role
+* Restricting API access based on authorization checks
+* Verifying that only authorized users can create candidate profiles
+* Preventing unauthorized access to uploaded CV files
+
+#### 2. Secure Data Transmission
+
+All communication between frontend and backend must occur over secure channels such as HTTPS.
+
+This protects:
+
+* Personal identification data
+* Contact information
+* Uploaded résumés
+* Session credentials
+
+Sensitive data must never be transmitted in plain text.
+
+#### 3. Secure Input Handling
+
+All user-submitted data must be sanitized and validated to prevent common security issues such as:
+
+* SQL injection
+* Cross-site scripting
+* Malicious file upload
+* Parameter tampering
+* Mass assignment vulnerabilities
+
+The backend must never trust client input directly.
+
+#### 4. Secure File Upload Protection
+
+File upload is one of the highest-risk parts of this feature.
+Controls should include:
+
+* Strict type validation
+* MIME type inspection
+* File size restrictions
+* Virus or malware scanning if supported
+* Secure file naming
+* Storage outside publicly executable directories
+* Access control before download/view
+* Prevention of direct URL guessing if files are stored remotely
+
+#### 5. Data Encryption and Protection
+
+Sensitive candidate data should be protected both:
+
+* **In transit**, using HTTPS/TLS
+* **At rest**, using database and storage encryption where applicable
+
+Particularly sensitive fields or documents may require additional encryption layers depending on policy.
+
+#### 6. Audit Trail and Accountability
+
+Every candidate creation event should be auditable.
+The system should record:
+
+* Who created the candidate
+* When the record was created
+* What file was uploaded
+* Whether validation or access failures occurred
+
+Audit logs help with compliance, incident investigation, and governance.
+
+#### 7. Privacy and Data Minimization
+
+Only collect data necessary for the recruiting process.
+The system should avoid requesting unnecessary personal information.
+
+Privacy practices should also consider:
+
+* Retention period for candidate data
+* Rules for deleting or anonymizing old records
+* Consent or notice requirements where applicable
+* Controlled access to candidate information by role
+
+#### 8. Session and Access Security
+
+The application should also enforce:
+
+* Secure session handling
+* CSRF protection for form submission
+* Rate limiting where appropriate
+* Timeout controls for inactive sessions
+* Protection against brute force or abuse on related endpoints
+
+#### 9. Compliance Considerations
+
+Depending on the organization and geography, the feature may need alignment with privacy and data protection frameworks such as:
+
+* GDPR
+* Local labor and privacy regulations
+* Internal corporate security policies
+
+Even if legal compliance is handled separately, the feature should be designed to support those requirements from the start.
+
+### Security Testing Requirements
+
+Security validation should include:
+
+* Access control testing
+* Input validation testing
+* File upload abuse testing
+* API vulnerability assessment
+* Logging verification
+* Data exposure testing
+* Session handling review
+
+### Deliverables
+
+* Role-based access controls for UI and API
+* Secure validation and sanitization layer
+* Secure file upload controls
+* Encrypted transport and protected storage
+* Audit logging
+* Privacy-conscious data handling rules
+* Security test cases and verification evidence
+
+### Suggested Subtasks
+
+* Implement recruiter-only access control
+* Add input sanitization and validation hardening
+* Protect upload pipeline
+* Configure HTTPS and secure headers
+* Add audit log events
+* Review retention and privacy requirements
+* Execute security testing and remediation
+
+---
+
+# Optional Improved Agile Breakdown
+
+You could also present the technical tasks in a more delivery-oriented format:
+
+### Task 1: Frontend Implementation
+
+Build the recruiter-facing Add Candidate interface, including dashboard access, structured form fields, client-side validation, CV upload control, responsive design, and accessibility compliance.
+
+### Task 2: Backend Processing
+
+Develop the APIs, validation logic, database persistence, business rules, and file storage services needed to create and store new candidate records securely and reliably.
+
+### Task 3: Security and Privacy
+
+Implement access controls, secure transmission, input sanitization, file protection, audit logging, and privacy safeguards to ensure candidate data is handled securely and in compliance with policy requirements.
+
