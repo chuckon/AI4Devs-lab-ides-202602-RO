@@ -2,7 +2,34 @@
 
 This project is a full-stack application with a React frontend and an Express backend using Prisma as an ORM. The frontend is initiated with Create React App, and the backend is written in TypeScript.
 
-## Directory and File Explanation
+## Features
+
+- Add new candidates to the ATS
+- Upload candidate resumes (PDF or DOCX)
+- Form validation and error handling
+- Responsive UI
+
+## API Endpoints
+
+- `POST /api/candidates` - Add a new candidate
+
+## Current Implementation
+
+The application now includes functionality to add candidates:
+
+- Frontend: React form with validation for adding candidates
+- Backend: Express API with Prisma ORM for data persistence
+- Database: PostgreSQL with Candidate model
+- File Upload: Support for PDF and DOCX resume uploads
+
+### Adding a Candidate
+
+1. Start the backend: `cd backend && npm run dev`
+2. Start the frontend: `cd frontend && npm start`
+3. Open http://localhost:3000
+4. Click "Add Candidate"
+5. Fill in the form and upload a resume
+6. Submit to add the candidate
 
 - `backend/`: Contains the server-side code written in Node.js.
   - `src/`: Contains the source code for the backend.

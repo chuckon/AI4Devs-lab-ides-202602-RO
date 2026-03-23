@@ -18,3 +18,18 @@ model User {
   email String  @unique
   name  String?
 }
+
+model Candidate {
+  id             Int      @id @default(autoincrement())
+  firstName      String
+  lastName       String
+  email          String   @unique
+  phone          String?
+  address        String?
+  education      String?
+  workExperience String?
+  resumePath     String?
+  status         String   @default("New")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
